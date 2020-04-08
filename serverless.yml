@@ -9,7 +9,7 @@ functions:
     events:
       - schedule: rate(1 minute)
     environment:
-      SPREADSHEET_ID: 1tYwsLlG8A5-Y8nJI8FXM7E9szkahdQ4cEdqdVDmS43c
-      SHEET_NAME: Sheet1
-      GITHUB_REPO_OWNER: wso2
-      GITHUB_REPO: product-is
+      SPREADSHEET_ID: <SPREADSHEET_ID>
+      SHEET_NAME: <SHEET_NAME>
+      GITHUB_REPO_OWNER: <GITHUB_REPO_OWNER>
+      GITHUB_REPO: <GITHUB_REPO>
