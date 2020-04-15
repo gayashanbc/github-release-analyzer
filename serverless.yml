@@ -3,13 +3,21 @@ service: wso2-release-analyse
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    GITHUB_REPO_OWNER: wso2
+    GITHUB_REPO: product-is
 functions:
   analyse:
     handler: handler.analyse
     events:
-      - schedule: rate(1 minute)
+      - schedule: cron(59 23 * * ? *)
     environment:
-      SPREADSHEET_ID: <SPREADSHEET_ID>
-      SHEET_NAME: <SHEET_NAME>
-      GITHUB_REPO_OWNER: <GITHUB_REPO_OWNER>
-      GITHUB_REPO: <GITHUB_REPO>
+      SPREADSHEET_ID: <ENTER_A_VALUE>
+      SHEET_NAME: <ENTER_A_VALUE>
+  writeRawData:
+    handler: handler.writeRawData
+    events:
+      - schedule: cron(59 23 * * ? *)
+    environment:
+      SPREADSHEET_ID: <ENTER_A_VALUE>
+      SHEET_NAME: <ENTER_A_VALUE>

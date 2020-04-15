@@ -46,6 +46,20 @@ async function getReleaseDetails() {
   });
 }
 
+function processData(rawData) {
+  const keys = ['tag_name'];
+  const date = new Date();
+  const values = [`${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`];
+
+  keys.forEach(key => values.push(rawData[key]));
+
+  rawData.assets
+    .filter(asset => asset.name.endsWith('.zip'))
+    .forEach(asset => values.push(asset.download_count));
+
+    return values;
+}
+
 async function appendToGoogleSheet(authClient, data) {
   const sheets = google.sheets({ version: 'v4', auth: authClient });
 
@@ -58,7 +72,7 @@ async function appendToGoogleSheet(authClient, data) {
     prettyPrint: true,
     resource: {
       values: [
-        Object.values(data).filter(value => typeof value === 'string')
+        data
       ],
     },
   })).data;
@@ -75,7 +89,24 @@ module.exports.analyse = async event => {
 
     delete releaseData.body;
 
-    await appendToGoogleSheet(authClient, releaseData);
+    await appendToGoogleSheet(authClient, processData(releaseData));
+  } catch (error) {
+    console.error('Error occurred while running the handler: ', error);
+  }
+
+  console.log('WSO2 IS release analyzer ended.');
+};
+
+module.exports.writeRawData = async event => {
+  console.log('WSO2 IS release analyzer triggered.')
+
+  try {
+    const releaseData = await getReleaseDetails();
+    const authClient = await authorize();
+
+    delete releaseData.body;
+
+    await appendToGoogleSheet(authClient, [JSON.stringify(releaseData)]);
   } catch (error) {
     console.error('Error occurred while running the handler: ', error);
   }
