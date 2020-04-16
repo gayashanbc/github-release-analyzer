@@ -1,3 +1,6 @@
+# GitHub Release Analyzer
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+
 ## Pre-requisites
 1. Create an AWS service account to access the Google APIs.
 2. Create a Google Sheet and give write access to the service account created above.
