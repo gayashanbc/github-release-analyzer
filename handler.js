@@ -81,7 +81,7 @@ async function appendToGoogleSheet(authClient, data) {
 }
 
 module.exports.analyse = async event => {
-  console.log('WSO2 IS release analyzer triggered.')
+  console.log('Release analyzer triggered.')
 
   try {
     const releaseData = await getReleaseDetails();
@@ -94,11 +94,11 @@ module.exports.analyse = async event => {
     console.error('Error occurred while running the handler: ', error);
   }
 
-  console.log('WSO2 IS release analyzer ended.');
+  console.log('Release analyzer ended.');
 };
 
 module.exports.writeRawData = async event => {
-  console.log('WSO2 IS release analyzer triggered.')
+  console.log('Release analyzer triggered.')
 
   try {
     const releaseData = await getReleaseDetails();
@@ -111,5 +111,5 @@ module.exports.writeRawData = async event => {
     console.error('Error occurred while running the handler: ', error);
   }
 
-  console.log('WSO2 IS release analyzer ended.');
+  console.log('Release analyzer ended.');
 };
