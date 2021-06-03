@@ -1,11 +1,11 @@
-service: wso2-release-analyse
+service: github-release-analyzer
 
 provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    GITHUB_REPO_OWNER: wso2
-    GITHUB_REPO: product-is
+    GITHUB_REPO_OWNER: <REPO_OWNER>
+    GITHUB_REPO: <REPO_NAME>
 functions:
   analyse:
     handler: handler.analyse
